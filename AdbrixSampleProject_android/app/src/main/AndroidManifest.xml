@@ -22,12 +22,20 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="adbrixrm" android:host="main"/>
+                <data android:scheme="adbrixrm" android:host="open"/>
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" android:host="fnbfmvaggkgvcajnoieutw.adtouch.adbrix.io"/>
             </intent-filter>
         </activity>
 
-        <meta-data android:name="AdBrixRmAppKey" android:value="x3Qz9T9JrESWCIuoXnun0A" />
-        <meta-data android:name="AdBrixRmSecretKey" android:value="oJozKmiERUOZQ4DK7JtbeQ" />
+        <activity android:name=".DeeplinkOpenActivity"/>
+
+        <meta-data android:name="AdBrixRmAppKey" android:value="fnbFMvaGgkGVcajnoIeUTw" />
+        <meta-data android:name="AdBrixRmSecretKey" android:value="mj2kvH7FL0Gdv15yaX2Cuw" />
         
     </application>
 

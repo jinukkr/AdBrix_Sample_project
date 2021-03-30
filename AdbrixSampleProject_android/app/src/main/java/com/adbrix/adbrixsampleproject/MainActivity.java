@@ -20,6 +20,9 @@ public class MainActivity extends AppCompatActivity implements AdBrixRm.Deferred
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        AdBrixRm.event("main_view_open");
+
+
         AdBrixRm.setDeferredDeeplinkListener(MainActivity.this);
 
         onNewIntent(MainActivity.this.getIntent());
@@ -51,11 +54,46 @@ public class MainActivity extends AppCompatActivity implements AdBrixRm.Deferred
 
         if (myDeeplink != null){
 
-            // Deeplink string
-            Log.d("igaworks" ,"Deeplink Value ::::::" + myDeeplink.toString());
+            // User Android Applink
+            if(myDeeplink.getScheme().equals("https")) {
+
+                Log.d("igaworks", "Android Applink Open :::::::::" + myDeeplink.toString());
+
+                String urlDecode = Uri.decode(myDeeplink.toString());
+                Uri myApplink = Uri.parse(urlDecode);
+
+                try {
+                    // Get deeplink parameter defined on deeplink_custom_path
+                    String getDeeplinkValue = myApplink.getQueryParameter("deeplink_custom_path");
+                    Uri myDeeplinkPath = Uri.parse(getDeeplinkValue);
+                    String pageName = myDeeplinkPath.getQueryParameter("page");
+
+                    if (pageName.equals("deeplink_open")){
+                        startActivity(new Intent( this, DeeplinkOpenActivity.class));
+                    }
+                } catch (NullPointerException e) {
+
+                }
+             // use Deeplink Scheme
+            } else {
+
+                Log.d("igaworks", "Android Deeplink Open :::::::::" + myDeeplink.toString());
+
+                try {
+
+                    String pageName = myDeeplink.getQueryParameter("page");
+
+                    if (pageName.equals("deeplink_open")){
+                        startActivity(new Intent( this, DeeplinkOpenActivity.class));
+                    }
+
+                } catch (NullPointerException e) {
+
+                }
+
+            }
+
         }
-
-
 
     }
 
@@ -80,15 +118,27 @@ public class MainActivity extends AppCompatActivity implements AdBrixRm.Deferred
 
         AdBrixRm.Common.purchase("myOrderID", productModelArrayList,0.0,2500.00, AdBrixRm.CommercePaymentMethod.MobilePayment);
 
-
-
     }
 
     @Override
-    public void onReceiveDeferredDeeplink(String deeplink) {
+    public void onReceiveDeferredDeeplink(String deferredDeeplink) {
 
         // Deferred Deeplink String
-        Log.d("igaworks", "DeferredDeeplink_String :::::::::" + deeplink);
+        Log.d("igaworks", "DeferredDeeplink_String :::::::::" + deferredDeeplink);
+
+        Uri myDeferredDeeplink = Uri.parse(deferredDeeplink);
+
+        try {
+
+            String pageName = myDeferredDeeplink.getQueryParameter("page");
+
+            if (pageName.equals("deeplink_open")){
+                startActivity(new Intent( this, DeeplinkOpenActivity.class));
+            }
+
+        } catch (NullPointerException e) {
+
+        }
 
     }
 }
