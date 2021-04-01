@@ -12,7 +12,7 @@ public class CustomApplication extends Application {
     public void onCreate() {
         super.onCreate();
 
-        AbxActivityHelper.initializeSdk(CustomApplication.this, "fnbFMvaGgkGVcajnoIeUTw", "mj2kvH7FL0Gdv15yaX2Cuw");
+        AbxActivityHelper.initializeSdk(CustomApplication.this, "3rvJ2x4r7Uieu9BC1hq8fQ", "VjxaxXcrhkeYSEcRrBsNZA");
 
         registerActivityLifecycleCallbacks(new AbxActivityLifecycleCallbacks());
 

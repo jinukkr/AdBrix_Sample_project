@@ -28,14 +28,15 @@
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="https" android:host="fnbfmvaggkgvcajnoieutw.adtouch.adbrix.io"/>
+                <data android:scheme="https" android:host="3rvj2x4r7uieu9bc1hq8fq.adtouch.adbrix.io"/>
             </intent-filter>
         </activity>
 
         <activity android:name=".DeeplinkOpenActivity"/>
 
-        <meta-data android:name="AdBrixRmAppKey" android:value="fnbFMvaGgkGVcajnoIeUTw" />
-        <meta-data android:name="AdBrixRmSecretKey" android:value="mj2kvH7FL0Gdv15yaX2Cuw" />
+        <meta-data android:name="AdBrixRmAppKey" android:value="3rvJ2x4r7Uieu9BC1hq8fQ" />
+        <meta-data android:name="AdBrixRmSecretKey" android:value="VjxaxXcrhkeYSEcRrBsNZA" />
+        <meta-data android:name="AdbrixRmQaMode" android:value="true" />
         
     </application>
 

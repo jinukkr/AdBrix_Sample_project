@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.igaworks.v2.core.AdBrixRm;
 
@@ -21,7 +24,6 @@ public class MainActivity extends AppCompatActivity implements AdBrixRm.Deferred
         setContentView(R.layout.activity_main);
 
         AdBrixRm.event("main_view_open");
-
 
         AdBrixRm.setDeferredDeeplinkListener(MainActivity.this);
 
@@ -58,6 +60,8 @@ public class MainActivity extends AppCompatActivity implements AdBrixRm.Deferred
             if(myDeeplink.getScheme().equals("https")) {
 
                 Log.d("igaworks", "Android Applink Open :::::::::" + myDeeplink.toString());
+                Toast toast = Toast.makeText(this.getApplicationContext(),"Android Applink Open :::::::::" + myDeeplink.toString(), Toast.LENGTH_LONG);
+                toast.show();
 
                 String urlDecode = Uri.decode(myDeeplink.toString());
                 Uri myApplink = Uri.parse(urlDecode);
@@ -78,6 +82,8 @@ public class MainActivity extends AppCompatActivity implements AdBrixRm.Deferred
             } else {
 
                 Log.d("igaworks", "Android Deeplink Open :::::::::" + myDeeplink.toString());
+                Toast toast = Toast.makeText(this.getApplicationContext(),"Android Deeplink Open :::::::::" + myDeeplink.toString(), Toast.LENGTH_LONG);
+                toast.show();
 
                 try {
 
@@ -101,6 +107,9 @@ public class MainActivity extends AppCompatActivity implements AdBrixRm.Deferred
 
         AdBrixRm.event("myCustomEvent");
 
+        Toast toast = Toast.makeText(this.getApplicationContext(),"AdBrix Custom Event Called" , Toast.LENGTH_LONG);
+        toast.show();
+
     }
 
     void samplePurchaseEvent () {
@@ -118,14 +127,18 @@ public class MainActivity extends AppCompatActivity implements AdBrixRm.Deferred
 
         AdBrixRm.Common.purchase("myOrderID", productModelArrayList,0.0,2500.00, AdBrixRm.CommercePaymentMethod.MobilePayment);
 
+        Toast toast = Toast.makeText(this.getApplicationContext(),"AdBrix Purchase Event Called" , Toast.LENGTH_LONG);
+        toast.show();
+
     }
 
     @Override
     public void onReceiveDeferredDeeplink(String deferredDeeplink) {
 
         // Deferred Deeplink String
-        Log.d("igaworks", "DeferredDeeplink_String :::::::::" + deferredDeeplink);
+        Log.d("igaworks", "AdBrix DeferredDeeplink Open :::::::::" + deferredDeeplink);
 
+        // set deferredDeeplink String to Uri
         Uri myDeferredDeeplink = Uri.parse(deferredDeeplink);
 
         try {
