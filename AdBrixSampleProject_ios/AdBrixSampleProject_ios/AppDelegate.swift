@@ -14,18 +14,13 @@ import AppTrackingTransparency
 class AppDelegate: UIResponder, UIApplicationDelegate, AdBrixRMDeferredDeeplinkDelegate {
     
     
-    func didReceiveDeferredDeeplink(deeplink: String) {
-        
-        print ("DeferredDeeplink ::::::" + deeplink)
-        
-    }
-    
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        // AdBrixRM 인스턴스 생성
-            let adBrix = AdBrixRM.getInstance
+        // AdBrixRM instance
+        let adBrix = AdBrixRM.getInstance
         
+        // ATTrackingManager request for use IDFA
         ATTrackingManager.requestTrackingAuthorization {(status) in
             
             switch status{
@@ -48,20 +43,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AdBrixRMDeferredDeeplinkD
             }
         }
 
-            // adbrix 앱키&시크릿키 설정
-            adBrix.initAdBrix(appKey: "x3Qz9T9JrESWCIuoXnun0A", secretKey: "oJozKmiERUOZQ4DK7JtbeQ")
+        // AdBrixRm init
+        adBrix.initAdBrix(appKey: "3rvJ2x4r7Uieu9BC1hq8fQ", secretKey: "VjxaxXcrhkeYSEcRrBsNZA")
         
+        // AdBrixRm DeferredDeeplink delegate init
         adBrix.delegateDeferredDeeplink = self
         
         return true
     }
-
     
+    // DeferredDeeplink Method
+    func didReceiveDeferredDeeplink(deeplink: String) {
+        
+        print ("AdBrix DeferredDeeplink ::::::" + deeplink)
+        
+    }
+
+    // Use Open URL for track the deeplink
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
-        // AdBrixRM 인스턴스 생성
+        
+        let urlString = url.absoluteString
+        
+        print("AdBrix Deeplink :::::::" + urlString)
+        
+        // AdBrixRM instance
         let adBrix = AdBrixRM.getInstance
-        // 딥링크 오픈 트래킹 코드 호출
+        
+        // AdBrixRM Deeplink tracking API
         adBrix.deepLinkOpen(url: url)
+        
+        let componets = URLComponents(string: urlString)
+        let items = componets?.queryItems
+        let pageName = items?.filter({$0.name == "page"}).first
+        let value = pageName?.value ?? ""
+        
+        if value == "deeplink_open" {
+
+        }
+        
+    
+        
         
         return true
     }

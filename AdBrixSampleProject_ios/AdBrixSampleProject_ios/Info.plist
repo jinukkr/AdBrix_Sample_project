@@ -2,8 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>AdbrixQaMode</key>
+	<true/>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>이 앱은 사용자를 트랙킹하기 위해 IDFA 를 사용합니다.</string>
+	<string>This App Allows to use IDFA value for Tracking user Activity in this App.</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

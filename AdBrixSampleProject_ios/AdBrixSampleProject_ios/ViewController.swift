@@ -15,6 +15,8 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        adBrix.event(eventName: "MainView")
     }
 
     @IBAction func customEvent(_ sender: Any) {
@@ -22,6 +24,14 @@ class ViewController: UIViewController {
         adBrix.event(eventName: "myCustomEvent_ios")
         
     }
+    
+    @IBAction func goToDeeplinkView(_ sender: Any) {
+        
+        let deeplinkView = self.storyboard?.instantiateViewController(identifier: "DeeplinkView")
+        deeplinkView?.modalTransitionStyle = .coverVertical
+        self.present(deeplinkView!, animated: true, completion: nil)
+    }
+    
     
     @IBAction func samplePurchse(_ sender: Any) {
          
