@@ -48,11 +48,13 @@
 + (BOOL)checkValidEmailAddress:(NSString *)emailAddress;
 
 + (NSString *)IDFA;
++ (NSString *)safeGetUUIDStringFromIDFA;
 + (NSString *)IDFV;
 + (BOOL)isAppleAdvertisingTrackingEnabled;
 + (NSString *)platformString;
 + (BOOL)isPhone;
 + (NSString *)carrier;
++ (BOOL)isHaveCellular;
 
 + (NSString *)screenHeight;
 + (NSString *)screenWidth;

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -48,11 +48,27 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BxQ-pR-buo">
-                                <rect key="frame" x="155" y="529" width="104" height="30"/>
+                                <rect key="frame" x="115" y="529" width="184" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Go To Deeplink"/>
+                                <state key="normal" title="Go To Deeplink (universial)"/>
                                 <connections>
                                     <action selector="goToDeeplinkView:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Zi8-sL-ivh"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xdx-7c-gmj">
+                                <rect key="frame" x="112" y="628" width="174" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Go to Deeplink (deeplink)"/>
+                                <connections>
+                                    <action selector="gotoDeeplinkschem:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WEF-0H-fgx"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fAc-UD-CaD">
+                                <rect key="frame" x="161" y="699" width="92" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="UserProperty"/>
+                                <connections>
+                                    <action selector="userProperty:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yxt-gp-aya"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -67,7 +83,7 @@
         <!--Deeplink View Controller-->
         <scene sceneID="W9J-lQ-rRZ">
             <objects>
-                <viewController storyboardIdentifier="DeeplinkView" id="6iW-0j-Dbf" customClass="DeeplinkViewController" customModule="AdBrixSampleProject_ios" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DeeplinkView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6iW-0j-Dbf" customClass="DeeplinkViewController" customModule="AdBrixSampleProject_ios" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gSf-77-RI2">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

@@ -30,6 +30,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
           
         }
         
+        if let userActivity = connectionOptions.userActivities.first,
+           userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+           let urlinfo = userActivity.webpageURL{
+            print ("Universial Link Open on SecneDelegate wiillConnectTo")
+            adBrix.deepLinkOpen(url:urlinfo)
+        }
+        
         
         guard let _ = (scene as? UIWindowScene) else { return }
     }
@@ -45,6 +52,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         adBrix.deepLinkOpen(url:url as URL)
         
     }
+    
+    func scene(_ scene: UIScene, continue userActivity: NSUserActivity) {
+           let adBrix = AdBrixRM.getInstance
+           if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+              let urlinfo = userActivity.webpageURL{
+               adBrix.deepLinkOpen(url:urlinfo)
+           }
+        }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.

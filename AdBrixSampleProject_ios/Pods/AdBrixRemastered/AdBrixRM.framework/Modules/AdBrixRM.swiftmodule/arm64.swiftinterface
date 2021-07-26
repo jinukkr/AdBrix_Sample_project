@@ -1,5 +1,5 @@
 // swift-interface-format-version: 1.0
-// swift-compiler-version: Apple Swift version 5.3.2 (swiftlang-1200.0.45 clang-1200.0.32.28)
+// swift-compiler-version: Apple Swift version 5.4.2 (swiftlang-1205.0.28.2 clang-1205.0.19.57)
 // swift-module-flags: -target arm64-apple-ios9.0 -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -Onone -module-name AdBrixRM
 @_exported import AdBrixRM
 import AdServices
@@ -69,6 +69,11 @@ extension URL {
   @objc override dynamic public func setNilValueForKey(_ key: Swift.String)
   @objc deinit
 }
+@objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @available(iOS 10.0, *)
+open class AdBrixMultiPushProviderController : ObjectiveC.NSObject {
+  @objc public func abxPushServiceExtensionTimeWillExpire()
+  @objc deinit
+}
 @_inheritsConvenienceInitializers @objc public class AdBrixBase64Key : ObjectiveC.NSObject {
   @available(*, deprecated, message: "Don't use this override function.")
   @objc override dynamic public func setValue(_ value: Any?, forKey key: Swift.String)
@@ -80,8 +85,8 @@ extension URL {
   @objc override dynamic public func setValuesForKeys(_ keyedValues: [Swift.String : Any])
   @available(*, deprecated, message: "Don't use this override function.")
   @objc override dynamic public func setNilValueForKey(_ key: Swift.String)
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @_inheritsConvenienceInitializers @objc public class AdBrixRmCommerceProductCategoryModel : ObjectiveC.NSObject {
   @objc override dynamic public init()
@@ -116,6 +121,9 @@ extension URL {
 @objc public protocol AdBrixRmPushNoticePopupCloseDelegate {
   @objc func noticePopupCloseCallback(popupSpaceKey: Swift.String, data: Swift.Dictionary<Swift.String, Any>?)
 }
+@objc public protocol AdBrixRMLogDelegate {
+  @objc func didPrintLog(level: AdBrixRM.AdBrixRM.AdBrixLogLevel, log: Swift.String)
+}
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class AdBrixRM : ObjectiveC.NSObject {
   public static let getInstance: AdBrixRM.AdBrixRM
   public static let Log: AdBrixRM.Logger
@@ -125,88 +133,89 @@ extension URL {
   public var delegateRemotePush: AdBrixRM.AdBrixRmPushRemoteDelegate?
   public var delegateNoticePopupLinkClick: AdBrixRM.AdBrixRmPushNoticePopupLinkClickDelegate?
   public var delegateNoticePopupClose: AdBrixRM.AdBrixRmPushNoticePopupCloseDelegate?
+  public var delegateLog: AdBrixRM.AdBrixRMLogDelegate?
   @objc final public let AdBrixDateFormat: Swift.String
   final public let AdBrixConstantsAGE: Swift.String
   final public let AdBrixConstantsGENDER: Swift.String
   @objc public enum AdBrixLogLevel : Swift.Int {
     case NONE = 0, TRACE = 1, DEBUG = 2, INFO = 3, WARNING = 4, ERROR = 5
-    public typealias RawValue = Swift.Int
     public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
   }
   @objc public enum AdBrixEventUploadCountInterval : Swift.Int {
-    case MIN = 10, NORMAL = 30, MAX = 1000
-    public typealias RawValue = Swift.Int
+    case MIN = 10, NORMAL = 30, MAX = 60
     public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
   }
   @objc public enum AdBrixEventUploadTimeInterval : Swift.Int {
     case MIN = 30, NORMAL = 60, MAX = 120
-    public typealias RawValue = Swift.Int
     public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
   }
   @objc public enum AdBrixUserPropKey : Swift.Int {
     case AGE, GENDER
-    public typealias RawValue = Swift.Int
     public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
   }
   @objc public enum AdBrixRmSharingChannel : Swift.Int {
     case AdBrixRmSharingFacebook = 1, AdBrixRmSharingKakaoTalk = 2, AdBrixRmSharingKakaoStory = 3, AdBrixRmSharingLine = 4, AdBrixRmSharingWhatsApp = 5, AdBrixRmSharingQQ = 6, AdBrixRmSharingWeChat = 7, AdBrixRmSharingSMS = 8, AdBrixRmSharingEmail = 9, AdBrixRmSharingCopyUrl = 10, AdBrixRmSharingETC = 11
+    public init?(rawValue: Swift.Int)
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
-    public init?(rawValue: Swift.Int)
   }
   @objc public enum AdBrixRmSignUpChannel : Swift.Int {
     case AdBrixRmSignUpKakaoChannel = 1, AdBrixRmSignUpNaverChannel = 2, AdBrixRmSignUpLineChannel = 3, AdBrixRmSignUpGoogleChannel = 4, AdBrixRmSignUpFacebookChannel = 5, AdBrixRmSignUpTwitterChannel = 6, AdBrixRmSignUpWhatsAppChannel = 7, AdBrixRmSignUpQQChannel = 8, AdBrixRmSignUpWeChatChannel = 9, AdBrixRmSignUpUserIdChannel = 10, AdBrixRmSignUpETCChannel = 11, AdBrixRmSignUpSkTidChannel = 12, AdBrixRmSignUpAppleIdChannel = 13
+    public init?(rawValue: Swift.Int)
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
-    public init?(rawValue: Swift.Int)
   }
   @objc public enum AdBrixRmInviteChannel : Swift.Int {
     case AdBrixRmInviteKakaoChannel = 1, AdBrixRmInviteNaverChannel = 2, AdBrixRmInviteLineChannel = 3, AdBrixRmInviteGoogleChannel = 4, AdBrixRmInviteFacebookChannel = 5, AdBrixRmInviteTwitterChannel = 6, AdBrixRmInviteWhatsAppChannel = 7, AdBrixRmInviteQQChannel = 8, AdBrixRmInviteWeChatChannel = 9, AdBrixRmInviteETCChannel = 10
+    public init?(rawValue: Swift.Int)
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
-    public init?(rawValue: Swift.Int)
   }
   @objc public enum AdBrixGenderType : Swift.Int {
     case Male = 2, Female = 1, Unknown = 0
-    public typealias RawValue = Swift.Int
     public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
   }
   @objc public enum AdBrixRmCurrencyType : Swift.Int {
     case KRW = 1, USD = 2, JPY = 3, EUR = 4, GBP = 5, CNY = 6, TWD = 7, HKD = 8, IDR = 9, INR = 10, RUB = 11, THB = 12, VND = 13, MYR = 14
+    public init?(rawValue: Swift.Int)
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
-    public init?(rawValue: Swift.Int)
   }
   @objc public enum AdbrixRmPaymentMethod : Swift.Int {
     case CreditCard = 1, BankTransfer = 2, MobilePayment = 3, ETC = 4
+    public init?(rawValue: Swift.Int)
     public typealias RawValue = Swift.Int
     public var rawValue: Swift.Int {
       get
     }
-    public init?(rawValue: Swift.Int)
   }
   @objc public class func sharedInstance() -> AdBrixRM.AdBrixRM
   @objc public func stopGettingIDFA()
@@ -215,6 +224,7 @@ extension URL {
   @objc public func isGdprForgetMe() -> Swift.Bool
   @objc public func setDeeplinkDelegate(delegate: AdBrixRM.AdBrixRMDeeplinkDelegate)
   @objc public func setDeferredDeeplinkDelegate(delegate: AdBrixRM.AdBrixRMDeferredDeeplinkDelegate)
+  @objc public func setLogDelegate(delegate: AdBrixRM.AdBrixRMLogDelegate)
   @available(iOS 10.0, *)
   @objc public func setAdBrixRmPushLocalDelegate(delegate: AdBrixRM.AdBrixRmPushLocalDelegate)
   @available(iOS 10.0, *)
@@ -244,7 +254,7 @@ extension URL {
   @available(iOS 10.0, *)
   @objc public func getNoticePopup(completionHandler: @escaping (Swift.Dictionary<Swift.String, Any>) -> Swift.Void)
   @available(iOS 10.0, *)
-  @objc public func presentNoticePopup(popupSpaceKey: Swift.String, _ type: AdBrixRM.NoticeType)
+  @objc public func presentNoticePopup(popupSpaceKey: Swift.String, _ type: AdBrixRM.AbxIAMNoticeType)
   @available(iOS 10.0, *)
   @objc public func presentNoticePopup(popupSpaceKey: Swift.String, viewController: UIKit.UIViewController)
   @objc public func initAdBrix(appKey: Swift.String, secretKey: Swift.String)
@@ -682,11 +692,28 @@ extension URL {
   @objc override dynamic public func setValuesForKeys(_ keyedValues: [Swift.String : Any])
   @available(*, deprecated, message: "Don't use this override function.")
   @objc override dynamic public func setNilValueForKey(_ key: Swift.String)
+  @available(iOS 10.0, *)
+  @objc public func didReceiveAbxPush(_ request: UserNotifications.UNNotificationRequest, withContentHandler contentHandler: @escaping (UserNotifications.UNNotificationContent) -> Swift.Void)
+  @available(iOS 10.0, *)
+  @objc public func abxPushServiceExtensionTimeWillExpire()
+  @objc public func parsePushData(_ pushDict: [Swift.AnyHashable : Any]) throws -> AdBrixRM.AbxRemotePushModel
+  @available(iOS 10.0, *)
+  @objc public func openPush(_ abxRemotePushModel: AdBrixRM.AbxRemotePushModel)
+  @objc public func deleteUserDataAndStopSDK(_ userId: Swift.String, _ completion: @escaping (AdBrixRM.Completion) -> Swift.Void)
+  @objc public func restartSDK(_ userId: Swift.String, _ completion: @escaping (AdBrixRM.Completion) -> Swift.Void)
   @objc deinit
 }
+@objc public enum Completion : Swift.Int {
+  case success = 0, fail
+  public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
+  public var rawValue: Swift.Int {
+    get
+  }
+}
 @objc @_inheritsConvenienceInitializers public class AbxSkbroadbandController : ObjectiveC.NSObject {
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers @objc public class Util_device : ObjectiveC.NSObject {
   @objc public class func sharedInstance() -> AdBrixRM.Util_device
@@ -715,9 +742,29 @@ public enum Component {
   public init(_ format: Swift.String, _ components: [AdBrixRM.Component])
   @objc deinit
 }
+@objc @_hasMissingDesignatedInitializers public class AbxRemotePushModel : ObjectiveC.NSObject {
+  final public let title: Swift.String
+  final public let subtitle: Swift.String
+  final public let body: Swift.String
+  final public let imageUrl: Swift.String
+  final public let genVibe: Swift.String
+  final public let genSound: Swift.String
+  final public let deeplinkUrl: Swift.String
+  final public let deeplinkJson: [Swift.String : Any]
+  final public let campaignId: Swift.String
+  final public let campaignRevisionNo: Swift.Int
+  final public let stepId: Swift.String
+  final public let cycleTime: Swift.String
+  final public let notificationId: Swift.Int
+  @objc public init(campaignId: Swift.String, campaignRevisionNo: Swift.Int, stepId: Swift.String, cycleTime: Swift.String) throws
+  @objc public func toString() -> Swift.String
+  @objc override dynamic public init()
+  @objc deinit
+}
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class AdBrixConfig : ObjectiveC.NSObject {
-  public static let STR_ASIdentifierManager: Swift.String
-  public static let AdBrixDateFormatSimple: Swift.String
+  final public let SDK_VERSION: Swift.String
+  final public let STR_ASIdentifierManager: Swift.String
+  final public let AdBrixDateFormatSimple: Swift.String
   @objc public class func sharedInstance() -> AdBrixRM.AdBrixConfig
   @available(*, deprecated, message: "Don't use this override function.")
   @objc override dynamic public func setValue(_ value: Any?, forKey key: Swift.String)
@@ -763,8 +810,8 @@ extension Formatters {
 }
 public enum Level : Swift.Int {
   case none, trace, debug, info, warning, error
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
@@ -812,19 +859,35 @@ open class Logger {
   @objc override dynamic public func setValuesForKeys(_ keyedValues: [Swift.String : Any])
   @available(*, deprecated, message: "Don't use this override function.")
   @objc override dynamic public func setNilValueForKey(_ key: Swift.String)
+  public func getDRState() -> AdBrixRM.AdBrixController.DRState
+  public func setIsSDKStopped(_ isSDKStopped: Swift.Bool)
+  public func setIsSDKStoppedServerSync(_ isSDKStoppedServerSync: Swift.Bool)
+  public func deleteUserDataAndStopSDK(_ userId: Swift.String, _ drCompletion: @escaping (AdBrixRM.Completion) -> Swift.Void)
+  public func restartSDK(_ userId: Swift.String, _ drCompletion: @escaping (AdBrixRM.Completion) -> Swift.Void)
+  public enum DRState : Swift.Int {
+    case InitRestartSynced
+    case InitRestartNotSynced
+    case DeleteNotSynced
+    case DeleteSynced
+    public init?(rawValue: Swift.Int)
+    public typealias RawValue = Swift.Int
+    public var rawValue: Swift.Int {
+      get
+    }
+  }
   @objc deinit
 }
-@objc public enum NoticeType : Swift.Int {
+@objc public enum AbxIAMNoticeType : Swift.Int {
   case FullImage = 0, FullWebView = 1, Modal = 2, Bar = 3, Carousel = 4, Modal2 = 5
-  public typealias RawValue = Swift.Int
   public init?(rawValue: Swift.Int)
+  public typealias RawValue = Swift.Int
   public var rawValue: Swift.Int {
     get
   }
 }
 @_inheritsConvenienceInitializers @objc public class AdBrixConstant : ObjectiveC.NSObject {
-  @objc deinit
   @objc override dynamic public init()
+  @objc deinit
 }
 @_hasMissingDesignatedInitializers public class Themes {
   @objc deinit
@@ -833,8 +896,11 @@ open class Logger {
   public init(trace: Swift.String, debug: Swift.String, info: Swift.String, warning: Swift.String, error: Swift.String)
   @objc deinit
 }
-@_hasMissingDesignatedInitializers @available(iOS 10.0, *)
-open class AdBrixPushService {
+@_inheritsConvenienceInitializers @available(iOS 10.0, *)
+@objc open class AdBrixPushService : UserNotifications.UNNotificationServiceExtension {
+  @objc override dynamic public init()
+  @objc override dynamic open func didReceive(_ request: UserNotifications.UNNotificationRequest, withContentHandler contentHandler: @escaping (UserNotifications.UNNotificationContent) -> Swift.Void)
+  @objc override dynamic open func serviceExtensionTimeWillExpire()
   @objc deinit
 }
 @objc @_inheritsConvenienceInitializers @_hasMissingDesignatedInitializers public class AdBrixUserConfig : ObjectiveC.NSObject {
@@ -896,8 +962,14 @@ extension AdBrixRM.AdBrixRM.AdBrixRmCurrencyType : Swift.RawRepresentable {}
 extension AdBrixRM.AdBrixRM.AdbrixRmPaymentMethod : Swift.Equatable {}
 extension AdBrixRM.AdBrixRM.AdbrixRmPaymentMethod : Swift.Hashable {}
 extension AdBrixRM.AdBrixRM.AdbrixRmPaymentMethod : Swift.RawRepresentable {}
+extension AdBrixRM.Completion : Swift.Equatable {}
+extension AdBrixRM.Completion : Swift.Hashable {}
+extension AdBrixRM.Completion : Swift.RawRepresentable {}
 extension AdBrixRM.Level : Swift.Hashable {}
 extension AdBrixRM.Level : Swift.RawRepresentable {}
-extension AdBrixRM.NoticeType : Swift.Equatable {}
-extension AdBrixRM.NoticeType : Swift.Hashable {}
-extension AdBrixRM.NoticeType : Swift.RawRepresentable {}
+extension AdBrixRM.AdBrixController.DRState : Swift.Equatable {}
+extension AdBrixRM.AdBrixController.DRState : Swift.Hashable {}
+extension AdBrixRM.AdBrixController.DRState : Swift.RawRepresentable {}
+extension AdBrixRM.AbxIAMNoticeType : Swift.Equatable {}
+extension AdBrixRM.AbxIAMNoticeType : Swift.Hashable {}
+extension AdBrixRM.AbxIAMNoticeType : Swift.RawRepresentable {}

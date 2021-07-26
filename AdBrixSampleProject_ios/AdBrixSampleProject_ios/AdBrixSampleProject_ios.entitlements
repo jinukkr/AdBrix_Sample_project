@@ -4,7 +4,7 @@
 <dict>
 	<key>com.apple.developer.associated-domains</key>
 	<array>
-		<string>3rvj2x4r7uieu9bc1hq8fq.adtouch.adbrix.io</string>
+		<string>applinks:3rvj2x4r7uieu9bc1hq8fq.adtouch.adbrix.io</string>
 	</array>
 </dict>
 </plist>

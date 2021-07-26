@@ -12,6 +12,11 @@
 #import <UserNotifications/UserNotifications.h>
 
 API_AVAILABLE(ios(10.0))
+//@interface AdBrixPushServiceObjC : NSObject
+//- (void)didReceiveAbxPush:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent *contentToDeliver))contentHandler;
+//
+//- (void)abxPushServiceExtensionTimeWillExpire;
+
 @interface AdBrixPushServiceObjC : UNNotificationServiceExtension
 
 - (void)didReceiveNotificationRequest:(UNNotificationRequest *)request withContentHandler:(void (^)(UNNotificationContent *contentToDeliver))contentHandler;
